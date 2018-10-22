@@ -1,9 +1,11 @@
 package com.mdlink.asynctask;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -12,6 +14,8 @@ import com.mdlink.Doctor_Portel_Data;
 import com.mdlink.Login_Doctor;
 import com.mdlink.MakeServiceCall;
 import com.mdlink.Patient_Portal_Data;
+import com.mdlink.Patient_portal_Activity;
+import com.mdlink.preferences.SharedPreferenceManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +49,7 @@ public class PatientRegisterAsyncTask extends AsyncTask<Void,Void,String> {
         return new MakeServiceCall().MakeServiceCall("http://api.themdlink.com/api/v1/patient", MakeServiceCall.POST, hashMap);
         //return null;
     }
+
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
@@ -53,29 +58,23 @@ public class PatientRegisterAsyncTask extends AsyncTask<Void,Void,String> {
         }
         try {
             JSONObject json = new JSONObject(s);
-
             System.out.println(">>>>>>>>>>"+json);
-
             if (json.getString("status").equalsIgnoreCase("200")) {
                 Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
-
                 JSONObject jsonArray = json.getJSONObject("result");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    //JSONObject object = jsonArray.getJSONObject("i");
-                    //Toast.makeText(Login_Doctor.this,jsonArray.getString("role_id"),Toast.LENGTH_SHORT).show();
-                    if (jsonArray.getString("role_id").equalsIgnoreCase("1")) {
-                        Intent intent = new Intent(context, Doctor_Portel_Data.class);
-                        intent.putExtra("UserName",jsonArray.getString("name"));
-                        context.startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(context, Patient_Portal_Data.class);
-                        intent.putExtra("UserName",jsonArray.getString("name"));
-                        context.startActivity(intent);
-                    }
+                if(!TextUtils.isEmpty(jsonArray.getString("user_id"))){
+                    Intent intent = new Intent(context, Patient_Portal_Data.class);
+                    intent.putExtra("UserName",hashMap.get("userID"));
+                    intent.putExtra("Role","2");
+                    intent.putExtra("UserId",jsonArray.getString("user_id"));
+                    SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context);
+                    sharedPreferenceManager.saveString("UserName",hashMap.get("userID"));
+                    sharedPreferenceManager.saveString("Role","2");
+                    sharedPreferenceManager.saveString("UserId",jsonArray.getString("user_id"));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
                 }
-
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

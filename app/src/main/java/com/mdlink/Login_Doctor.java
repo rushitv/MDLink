@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mdlink.preferences.SharedPreferenceManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -112,12 +114,20 @@ public class Login_Doctor extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         //JSONObject object = jsonArray.getJSONObject("i");
                         //Toast.makeText(Login_Doctor.this,jsonArray.getString("role_id"),Toast.LENGTH_SHORT).show();
+
+                        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(Login_Doctor.this);
+                        sharedPreferenceManager.saveString("UserName",email.getText().toString());
+                        sharedPreferenceManager.saveString("Role",jsonArray.getString("role_id"));
+                        sharedPreferenceManager.saveString("UserId",jsonArray.getString("user_id"));
+
                         if (jsonArray.getString("role_id").equalsIgnoreCase("1")) {
                             Intent intent = new Intent(Login_Doctor.this, Doctor_Portel_Data.class);
                             intent.putExtra("UserName",jsonArray.getString("name"));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(Login_Doctor.this, Patient_Portal_Data.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.putExtra("UserName",jsonArray.getString("name"));
                             startActivity(intent);
                         }

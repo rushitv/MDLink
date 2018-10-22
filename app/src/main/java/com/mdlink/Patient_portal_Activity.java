@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hbb20.CountryCodePicker;
 import com.mdlink.asynctask.PatientRegisterAsyncTask;
 import com.mdlink.util.ValidationsUtil;
 
@@ -20,11 +22,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class Patient_portal_Activity extends AppCompatActivity implements View.OnClickListener {
-
+    private String TAG = getClass().getSimpleName();
     TextView tvPatient_submit, tvSignIn;
     EditText editEmail,editFullName, editPhone, editAge, editBirthdate, editAddress, editPassword, editConfirmPassword;
+    CountryCodePicker ccp;
     HashMap<String, String> hashMap = new HashMap<>();
     int mYear,mMonth,mDay;
+    String CountryCode="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,16 @@ public class Patient_portal_Activity extends AppCompatActivity implements View.O
 
         tvPatient_submit = (TextView) findViewById(R.id.patient_submit);
         tvSignIn = (TextView)findViewById(R.id.textview_sing);
-
+        ccp = findViewById(R.id.ccp);
+        CountryCode = ccp.getSelectedCountryCode();
+        ccp.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                CountryCode = "";
+               // Toast.makeText(getContext(), "Updated " + ccp.getSelectedCountryName(), Toast.LENGTH_SHORT).show();
+                CountryCode = ccp.getSelectedCountryCode();
+            }
+        });
         editEmail = findViewById(R.id.editEmail);
         editFullName = findViewById(R.id.editFullName);
         editPhone = findViewById(R.id.editPhone);
@@ -77,9 +90,10 @@ public class Patient_portal_Activity extends AppCompatActivity implements View.O
                     Toast.makeText(Patient_portal_Activity.this,"",Toast.LENGTH_LONG).show();
                 }else {
                     hashMap.clear();
+                    Log.i(TAG,"CountryCode>>>>>"+CountryCode);
                     hashMap.put("email", editEmail.getText().toString());
                     hashMap.put("name", editFullName.getText().toString());
-                    hashMap.put("phone_no", editPhone.getText().toString());
+                    hashMap.put("phone_no", CountryCode + editPhone.getText().toString());
                     hashMap.put("age", editAge.getText().toString());
                     hashMap.put("birthdate", editBirthdate.getText().toString());
                     hashMap.put("address", editAddress.getText().toString());
@@ -88,6 +102,7 @@ public class Patient_portal_Activity extends AppCompatActivity implements View.O
                     hashMap.put("terms_and_cond", "1");
                     hashMap.put("userID", editEmail.getText().toString());
                     hashMap.put("role_id", "2");
+
                     new PatientRegisterAsyncTask(Patient_portal_Activity.this, hashMap).execute();
                 }
                 break;

@@ -11,8 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mdlink.preferences.SharedPreferenceManager;
+import com.mdlink.splash.SplashActivity;
+
 public class Patient_Portal_Data extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private SharedPreferenceManager sharedPreferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +25,7 @@ public class Patient_Portal_Data extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
+        sharedPreferenceManager = new SharedPreferenceManager(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,6 +44,9 @@ public class Patient_Portal_Data extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        finishAffinity();
+        finish();
     }
 
     @Override
@@ -98,11 +97,11 @@ public class Patient_Portal_Data extends AppCompatActivity
             Intent intent=new Intent(Patient_Portal_Data.this,ContactUs_Activity.class);
             startActivity(intent);
 
-        } else if (id == R.id.log) {
-
-            Intent intent=new Intent(Patient_Portal_Data.this,Splash_Activity.class);
+        } else if (id == R.id.logout) {
+            //clear data
+            sharedPreferenceManager.ClearData();
+            Intent intent=new Intent(Patient_Portal_Data.this,SplashActivity.class);
             startActivity(intent);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -18,9 +18,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editEmail"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -32,9 +33,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editFullName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -45,7 +47,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="08dp"
             android:text="Phone Number" />
 
         <LinearLayout
@@ -54,6 +56,7 @@
             android:orientation="horizontal">
 
             <Spinner
+                android:visibility="gone"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -61,21 +64,27 @@
 
             </Spinner>
 
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <EditText
+                android:id="@+id/editPhone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_b"
                 android:inputType="number"
-                android:textSize="15dp" />
+                android:hint="@string/label_phone_number"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editAge"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -87,21 +96,25 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editBirthdate"
                 android:layout_width="match_parent"
+                android:focusableInTouchMode="false"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
+                android:clickable="true"
                 android:hint="Birth Date" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editAddress"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -112,9 +125,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editPassword"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -125,9 +139,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="08dp">
 
             <EditText
+                android:id="@+id/editConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -138,22 +153,25 @@
         <TextView
             android:id="@+id/patient_submit"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_btn"
             android:gravity="center"
             android:text="Register"
-            android:textColor="#f9f7f7"
-            android:textSize="30dp" />
+            android:clickable="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/textview_sing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="08dp"
             android:gravity="center"
-            android:text="Already have an account? Sign in" />
-
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/label_signin" />
 
     </LinearLayout>
 </ScrollView>

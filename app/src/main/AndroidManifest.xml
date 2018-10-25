@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mdlink">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,13 +13,85 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="MDLink" />
+        <activity
+            android:name=".Book_Appoinment"
+            android:label="MDLink" />
+        <activity
+            android:name=".Doctor_portal_Activity"
+            android:label="Doctor Registration" />
+        <activity
+            android:name=".Patient_portal_Activity"
+            android:label="MDLink" />
+        <activity
+            android:name=".ContactUs_Activity"
+            android:label="Contact Us" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:label="About Us" />
+        <activity
+            android:name=".User_Guide_Activity"
+            android:label="User_Guide" />
+        <!--<activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />-->
+        <activity
+            android:name=".Login_Doctor"
+            android:label="Login" />
+        <activity
+            android:name=".Urgent_Care"
+            android:label="Urgent Care" />
+        <activity
+            android:name=".Medical_Advice"
+            android:label="Medical Advice" />
+        <activity
+            android:name=".Labs_and_Screening"
+            android:label="LAb And Screening" />
+        <activity
+            android:name=".Addiction_Activity"
+            android:label="Addiction" />
+        <activity
+            android:name=".Therapy_Activity"
+            android:label="Therapy" />
+        <activity
+            android:name=".Mood_Activity"
+            android:label="Depression And Mood" />
+        <activity
+            android:name=".Doctor_Profile"
+            android:label="Doctor Profile" />
+        <activity
+            android:name=".Scheduled_Appoinment_Doctor"
+            android:label="Scheduled Appoinment" />
+        <activity
+            android:name=".Medical_CheckOut_Doctor"
+            android:label="Medical Chechout" />
+        <activity android:name=".Guide_Page" />
+        <activity
+            android:name=".Patient_Portal_Data"
+            android:label="@string/title_activity_patient__portal__data"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Doctor_Portel_Data"
+            android:label="@string/title_activity_doctor__portel__data"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity android:name=".Splash_Activity" />-->
+        <activity android:name=".Signacture_Activity" />
+        <activity android:name=".Patient_Profile"></activity>
+
     </application>
 
 </manifest>

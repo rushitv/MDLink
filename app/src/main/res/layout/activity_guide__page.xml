@@ -4,34 +4,62 @@
     android:id="@+id/activity_guide__page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:padding="08dp"
     android:orientation="vertical"
-    tools:context="com.example.mrprashant_patel.mdlink.Guide_Page">
+    tools:context=".Guide_Page">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_above="@+id/bottomTextAndButton"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginTop="30dp">
+        android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomTextAndButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Enter your Symptoms And Choose Between Message ,Audio and Video Appointment"
-        android:textSize="15dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Enter your Symptoms And Choose Between Message ,Audio and Video Appointment"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_marginTop="08dp"
+            android:layout_marginLeft="08dp"
+            android:layout_marginRight="08dp"
+            android:id="@+id/view_finish_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:text="continue"
+            android:textColor="@color/colorWhite" />
+
+    </LinearLayout>
 
 
-    <Button
-        android:layout_marginTop="25dp"
-        android:background="@drawable/custom_btn"
-        android:id="@+id/view_finish_btn"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="continue" />
+</RelativeLayout>
+
+
+
 
 </LinearLayout>

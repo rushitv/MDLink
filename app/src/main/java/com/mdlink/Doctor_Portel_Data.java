@@ -159,7 +159,7 @@ public class Doctor_Portel_Data extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.about) {
-            Intent intent=new Intent(Doctor_Portel_Data.this,About_Us_Activity.class);
+            Intent intent=new Intent(Doctor_Portel_Data.this,AboutUsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.contact) {

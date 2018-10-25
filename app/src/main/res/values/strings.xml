@@ -18,4 +18,19 @@
     <string name="title_activity_doctor__portel__data">Doctor_Portel_Data</string>tes,medications or
     food ,our provide can help
     <string name="addc">MDLink is a Secure onlime medical \n platform and service that allows \n patients to connect with the best \n doctors and receive trement best \n video , audio or text messages. \n\n\n\n\n Our digital platform helps to address \n the challenges of connecting with \n patients who are unable to reach their \n deliverring a personalized and \n convenient state-of-the-art service</string>
+    <string name="label_login">Login</string>
+    <string name="label_urgentcare">Urgent Care</string>
+    <string name="label_learnmore">Learn More</string>
+    <string name="label_medicaladvice">Medical Advice</string>
+    <string name="label_labesandscreen">Labs and Screening</string>
+    <string name="label_addiction">Addiction</string>
+    <string name="label_depressandmood">Depression And Mood</string>
+    <string name="label_therapy">Therapy</string>
+    <string name="label_signin">Already have an account? Sign in</string>
+    <string name="label_save">Save</string>
+    <string name="label_clear">Clear</string>
+    <string name="label_tap_to_sign">Tap to sign</string>
+    <string name="label_attach_file">Attach file</string>
+    <string name="label_medical_certificate">Medical Certificate</string>
+    <string name="label_phone_number">Phone Number</string>
 </resources>

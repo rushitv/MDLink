@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -34,9 +35,12 @@ import com.mdlink.api.APIService;
 import com.mdlink.api.RestAPIClent;
 import com.mdlink.drawing.MyDrawView;
 import com.mdlink.model.DoctorPortalRequest;
+import com.mdlink.model.DoctorPortalResponse;
 import com.mdlink.util.Constants;
 import com.mdlink.util.FileUtil;
 import com.mdlink.util.ValidationsUtil;
+
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -77,10 +81,15 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
             RestAPIClent.getClient().create(APIService.class);
     Calendar calendarTime;
     TimePickerDialog timepickerdialog;
-    private CheckBox checkboxSunday,checkboxMonday,checkboxTuesday,checkboxWednesday,
-            checkboxThursday,checkboxFriday,checkboxSaturday;
-    private EditText edtAvailMorningTime;
+    private CheckBox checkboxSunday, checkboxMonday, checkboxTuesday, checkboxWednesday,
+            checkboxThursday, checkboxFriday, checkboxSaturday;
+
+    private EditText edtAvailMorningTime, edtAvailMorningTimeTO, edtAvailEveningTime, edtAvailEveningTimeTO,
+            edtConfirmPasswordDP, edtPasswordDP, edtLocationCountryDP, edtRegistrationNumberDP, edtMedicalYearOfGraduationDP,
+            edtMedicalCouncilDP, edtMedicalSchoolDP, edtSpecialityDP, edtQualificationDP,
+            edtAgeDP, edtPhoneDP, edtFullNameDP, edtEmailDP;
     String format;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +98,27 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
 
         edtAvailMorningTime = findViewById(R.id.edtAvailMorningTime);
         edtAvailMorningTime.setOnClickListener(this);
+        edtAvailMorningTimeTO = findViewById(R.id.edtAvailMorningTimeTO);
+        edtAvailMorningTimeTO.setOnClickListener(this);
+        edtAvailEveningTime = findViewById(R.id.edtAvailEveningTime);
+        edtAvailEveningTime.setOnClickListener(this);
+        edtAvailEveningTimeTO = findViewById(R.id.edtAvailEveningTimeTO);
+        edtAvailEveningTimeTO.setOnClickListener(this);
+
+        edtPasswordDP = findViewById(R.id.edtPasswordDP);
+        edtConfirmPasswordDP = findViewById(R.id.edtConfirmPasswordDP);
+        edtLocationCountryDP = findViewById(R.id.edtLocationCountryDP);
+        edtRegistrationNumberDP = findViewById(R.id.edtRegistrationNumberDP);
+        edtMedicalYearOfGraduationDP = findViewById(R.id.edtMedicalYearOfGraduationDP);
+        edtMedicalCouncilDP = findViewById(R.id.edtMedicalCouncilDP);
+        edtSpecialityDP = findViewById(R.id.edtSpecialityDP);
+
+        edtMedicalSchoolDP = findViewById(R.id.edtMedicalSchoolDP);
+        edtQualificationDP = findViewById(R.id.edtQualificationDP);
+        edtAgeDP = findViewById(R.id.edtAgeDP);
+        edtPhoneDP = findViewById(R.id.edtPhoneDP);
+        edtFullNameDP = findViewById(R.id.edtFullNameDP);
+        edtEmailDP = findViewById(R.id.edtEmailDP);
 
         checkboxSunday = findViewById(R.id.checkboxSunday);
         checkboxMonday = findViewById(R.id.checkboxMonday);
@@ -193,67 +223,50 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
                 }
                 break;
             case R.id.edtAvailMorningTime:
-                calendarTime = Calendar.getInstance();
-                int CalendarHour, CalendarMinute;
-                CalendarHour = calendarTime.get(Calendar.HOUR_OF_DAY);
-                CalendarMinute = calendarTime.get(Calendar.MINUTE);
-                timepickerdialog = new TimePickerDialog(Doctor_portal_Activity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-
-                                if (hourOfDay == 0) {
-                                    hourOfDay += 12;
-                                    format = " AM";
-                                } else if (hourOfDay == 12) {
-                                    format = " PM";
-
-                                } else if (hourOfDay > 12) {
-                                    hourOfDay -= 12;
-                                    format = " PM";
-                                } else {
-                                    format = " AM";
-                                }
-                                Log.i(TAG,">>>>>>"+hourOfDay + ":" + ValidationsUtil.getPaddedNumber(minute) + format);
-                                //DisplayTime.setText(hourOfDay + ":" + minute + format);
-                            }
-                        }, CalendarHour, CalendarMinute, false);
-                timepickerdialog.show();
-
+                showAndSetTimePopup(edtAvailMorningTime);
+                break;
+            case R.id.edtAvailMorningTimeTO:
+                showAndSetTimePopup(edtAvailMorningTimeTO);
+                break;
+            case R.id.edtAvailEveningTime:
+                showAndSetTimePopup(edtAvailEveningTime);
+                break;
+            case R.id.edtAvailEveningTimeTO:
+                showAndSetTimePopup(edtAvailEveningTimeTO);
                 break;
             case R.id.btnSubmit:
+
                 ArrayList<String> stringArrayList = new ArrayList<>();
-                if(checkboxSunday.isChecked()){
+                if (checkboxSunday.isChecked()) {
                     stringArrayList.add("0");
                 }
-                if(checkboxMonday.isChecked()){
+                if (checkboxMonday.isChecked()) {
                     stringArrayList.add("1");
                 }
-                if(checkboxTuesday.isChecked()){
+                if (checkboxTuesday.isChecked()) {
                     stringArrayList.add("2");
                 }
-                if(checkboxWednesday.isChecked()){
+                if (checkboxWednesday.isChecked()) {
                     stringArrayList.add("3");
                 }
-                if(checkboxThursday.isChecked()){
+                if (checkboxThursday.isChecked()) {
                     stringArrayList.add("4");
                 }
-                if(checkboxFriday.isChecked()){
+                if (checkboxFriday.isChecked()) {
                     stringArrayList.add("5");
                 }
-                if(checkboxSaturday.isChecked()){
+                if (checkboxSaturday.isChecked()) {
                     stringArrayList.add("6");
                 }
 
                 StringBuilder checkboxExtract = new StringBuilder();
-                for(String checkVal : stringArrayList){
+                for (String checkVal : stringArrayList) {
                     checkboxExtract.append(checkVal);
                     checkboxExtract.append(Constants.SEPARATOR);
                 }
 
                 String availabledays = checkboxExtract.toString();
-
+                Log.i(TAG, "Available Days>>>>" + availabledays);
 
                 //pass it like this
                 File fileSignature = new File(tvSignaturePath.getText().toString());
@@ -273,16 +286,55 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
                         MultipartBody.Part.createFormData("medical_certificate", fileSignature.getName(), requestFileCertificate);
 
                 RequestBody email =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), "rushit@gmail.com");
-                RequestBody available_day =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), availabledays);
+                        RequestBody.create(MediaType.parse("form-data"), edtEmailDP.getText().toString());
+                RequestBody phone =
+                        RequestBody.create(MediaType.parse("form-data"), edtPhoneDP.getText().toString());
                 RequestBody name =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), "rushit@gmail.com");
-                RequestBody phone_no =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), "rushit@gmail.com");
+                        RequestBody.create(MediaType.parse("form-data"), edtFullNameDP.getText().toString());
+                RequestBody age =
+                        RequestBody.create(MediaType.parse("form-data"), edtAgeDP.getText().toString());
+                RequestBody qualification =
+                        RequestBody.create(MediaType.parse("form-data"), edtQualificationDP.getText().toString());
 
-                callAPI(email, name, phone_no,mpSignature, mpCertificate);
+                RequestBody speciality =
+                        RequestBody.create(MediaType.parse("form-data"), edtSpecialityDP.getText().toString());
+                RequestBody medicalSchool =
+                        RequestBody.create(MediaType.parse("form-data"), edtMedicalSchoolDP.getText().toString());
+                RequestBody medicalCounsil =
+                        RequestBody.create(MediaType.parse("form-data"), edtMedicalCouncilDP.getText().toString());
+                RequestBody graduationYear =
+                        RequestBody.create(MediaType.parse("form-data"), edtMedicalYearOfGraduationDP.getText().toString());
+                RequestBody registrationNumber =
+                        RequestBody.create(MediaType.parse("form-data"), edtRegistrationNumberDP.getText().toString());
+                RequestBody location =
+                        RequestBody.create(MediaType.parse("form-data"), edtLocationCountryDP.getText().toString());
+                RequestBody password =
+                        RequestBody.create(MediaType.parse("form-data"), edtPasswordDP.getText().toString());
+                RequestBody confirmPassword =
+                        RequestBody.create(MediaType.parse("form-data"), edtConfirmPasswordDP.getText().toString());
 
+                RequestBody availabledaysVal =
+                        RequestBody.create(MediaType.parse("form-data"), availabledays);
+
+                RequestBody availMorning =
+                        RequestBody.create(MediaType.parse("form-data"), edtAvailMorningTime.getTag().toString());
+                RequestBody availMorningTo =
+                        RequestBody.create(MediaType.parse("form-data"), edtAvailMorningTimeTO.getTag().toString());
+                RequestBody availEvening =
+                        RequestBody.create(MediaType.parse("form-data"), edtAvailEveningTime.getTag().toString());
+                RequestBody availEveningTo =
+                        RequestBody.create(MediaType.parse("form-data"), edtAvailEveningTimeTO.getTag().toString());
+
+                RequestBody terms_and_condition = RequestBody.create(MediaType.parse("form-data"), "1");
+                RequestBody role_id = RequestBody.create(MediaType.parse("form-data"), "1");
+                RequestBody userId = RequestBody.create(MediaType.parse("form-data"), edtEmailDP.getText().toString());
+                RequestBody created_at = RequestBody.create(MediaType.parse("form-data"), "2018-23-10 13:17:29");
+
+                callAPI(email, name, phone, age, qualification, speciality, medicalSchool, medicalCounsil,
+                        graduationYear, registrationNumber, location, password, confirmPassword,
+                        availabledaysVal, availMorning, availMorningTo, availEvening, availEveningTo, terms_and_condition, userId,
+                        role_id, created_at
+                        , mpSignature, mpCertificate);
                 break;
         }
     }
@@ -372,25 +424,89 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
         }
     }
 
-    private void callAPI(RequestBody email, RequestBody name, RequestBody phone_no,
+    private void callAPI(final RequestBody email, RequestBody name, RequestBody phone_no,
+                         RequestBody age, RequestBody qualification, RequestBody speciality,
+                         RequestBody medical_school, RequestBody medical_council, RequestBody graduation_year,
+                         RequestBody registration_number, RequestBody location, RequestBody password,
+                         RequestBody confirmpassword, RequestBody available_day, RequestBody avail_morning,
+                         RequestBody avail_morning_to, RequestBody avail_evening, RequestBody avail_evening_to,
+                         RequestBody terms_and_cond, RequestBody userID, RequestBody role_id, RequestBody created_at,
                          MultipartBody.Part signature, MultipartBody.Part medical_certificate) {
 
-        Call<JsonObject> callToGetUserProfile = apiService.postDoctorRequest(email, name,phone_no, signature, medical_certificate);
-        callToGetUserProfile.enqueue(new Callback<JsonObject>() {
+        Call<DoctorPortalResponse> callToGetUserProfile = apiService.postDoctorRequest(
+                email, name, phone_no,
+                age, qualification, speciality,
+                medical_school, medical_council, graduation_year,
+                registration_number, location, password,
+                confirmpassword, available_day, avail_morning,
+                avail_morning_to, avail_evening, avail_evening_to,
+                terms_and_cond, userID, role_id, created_at,
+                signature, medical_certificate);
+
+
+        callToGetUserProfile.enqueue(new Callback<DoctorPortalResponse>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.i(TAG,">>>>>>>>>>>>>"+response.toString());
-                Log.i(TAG,">>>>>>>>>>>>>"+response.body());
-                if(response.code() == 200){
-                    Toast.makeText(Doctor_portal_Activity.this,"",Toast.LENGTH_LONG).show();
+            public void onResponse(Call<DoctorPortalResponse> call, Response<DoctorPortalResponse> response) {
+                //Log.i(TAG,">>>>>>>>>>>>>"+response.toString());
+                Log.i(TAG, ">>>>>>>>>>>>>" + response.body());
+                if (response.code() == 200) {
+                    Log.i(TAG, ">>>>>>>>>>>>>" + response.body());
+                    if(response.body().getStatus()!=200) {
+                        String message = "";
+                        DoctorPortalResponse doctorPortalResponse = response.body();
+                        for (String key : doctorPortalResponse.getResult().keySet()) {
+                            Log.i(TAG, ">>>>>>>>>>>>>" + doctorPortalResponse.getResult().get(key));
+                            message += doctorPortalResponse.getResult().get(key).toString().replaceAll("\\[", "").replaceAll("\\]","") + "\n";
+                        }
+                        Toast.makeText(Doctor_portal_Activity.this, message, Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(Doctor_portal_Activity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Doctor_portal_Activity.this, Login_Doctor.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<DoctorPortalResponse> call, Throwable t) {
                 t.fillInStackTrace();
             }
         });
 
+    }
+
+    private void showAndSetTimePopup(final EditText editText) {
+        calendarTime = Calendar.getInstance();
+        int CalendarHour, CalendarMinute;
+        CalendarHour = calendarTime.get(Calendar.HOUR_OF_DAY);
+        CalendarMinute = calendarTime.get(Calendar.MINUTE);
+        timepickerdialog = new TimePickerDialog(Doctor_portal_Activity.this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+
+                        if (hourOfDay == 0) {
+                            hourOfDay += 12;
+                            format = " AM";
+                        } else if (hourOfDay == 12) {
+                            format = " PM";
+
+                        } else if (hourOfDay > 12) {
+                            hourOfDay -= 12;
+                            format = " PM";
+                        } else {
+                            format = " AM";
+                        }
+
+                        String val = hourOfDay + ":" + ValidationsUtil.getPaddedNumber(minute) + format;
+                        editText.setText(val);
+                        editText.setTag(val);
+                    }
+                    //DisplayTime.setText(hourOfDay + ":" + minute + format);
+
+                }, CalendarHour, CalendarMinute, false);
+        timepickerdialog.show();
     }
 }

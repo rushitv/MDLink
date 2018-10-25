@@ -24,11 +24,11 @@
             android:title="Contact Us" />
     </group>
 
-            <item
-                android:id="@+id/log"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Log Out" />
-        </menu>
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_menu_send"
+        android:title="Log Out" />
+</menu>
 
 
 

@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initViews() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
         setSupportActionBar(toolbar);
 
         tvThree = findViewById(R.id.tvThree);
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.aboutus) {
-            Intent intent = new Intent(MainActivity.this, About_Us_Activity.class);
+            Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.userguide) {
             Intent intent = new Intent(MainActivity.this, User_Guide_Activity.class);

@@ -6,13 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Guide_Page extends AppCompatActivity {
 
     ViewPager viewPager;
     int[] imgdata = {R.drawable.doct, R.drawable.wom, R.drawable.computer};
     int i_position;
-    Button btn_finish;
+    TextView btn_finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class Guide_Page extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         CustomView customView = new CustomView(Guide_Page.this, imgdata);
         viewPager.setAdapter(customView);
-        btn_finish = (Button) findViewById(R.id.view_finish_btn);
+        btn_finish =  findViewById(R.id.view_finish_btn);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -59,7 +60,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Multipart;
 
-public class Doctor_portal_Activity extends AppCompatActivity implements View.OnClickListener {
+public class Doctor_portal_Activity extends BaseActivity implements View.OnClickListener {
     private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 1;
     private static final int WRITE_STORAGE_PERMISSION_REQUEST_CODE = 3;
     private static final int ACTIVITY_CHOOSE_FILE = 2;
@@ -89,13 +90,19 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
             edtMedicalCouncilDP, edtMedicalSchoolDP, edtSpecialityDP, edtQualificationDP,
             edtAgeDP, edtPhoneDP, edtFullNameDP, edtEmailDP;
     String format;
+    private Toolbar toolbar;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, Doctor_portal_Activity.class);
+        context.startActivity(starter);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_portal_);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        initToolbar();
         edtAvailMorningTime = findViewById(R.id.edtAvailMorningTime);
         edtAvailMorningTime.setOnClickListener(this);
         edtAvailMorningTimeTO = findViewById(R.id.edtAvailMorningTimeTO);
@@ -156,18 +163,18 @@ public class Doctor_portal_Activity extends AppCompatActivity implements View.On
             }
         });
     }
-
-
+    private void initToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_white_180));
+        setUpToolbar(toolbar, R.color.colorAccent);
+        setToolbarTitle(getString(R.string.label_doctorregistration), R.color.colorAccent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
         if (id == android.R.id.home) {
-
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -37,19 +37,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/TextSmall"
             android:gravity="center"
             android:text="Enter your Symptoms And Choose Between Message ,Audio and Video Appointment"
             android:textSize="16sp" />
 
-        <Button
-            android:layout_marginTop="08dp"
-            android:layout_marginLeft="08dp"
-            android:layout_marginRight="08dp"
+        <TextView
+            android:layout_margin="08dp"
+            android:padding="04dp"
+            style="@style/TextMedium"
             android:id="@+id/view_finish_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAllCaps="true"
             android:background="@drawable/custom_btn"
             android:text="continue"
             android:textColor="@color/colorWhite" />

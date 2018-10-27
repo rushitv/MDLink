@@ -3,7 +3,9 @@ package com.mdlink;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -21,7 +23,7 @@ import com.mdlink.util.ValidationsUtil;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Patient_portal_Activity extends AppCompatActivity implements View.OnClickListener {
+public class Patient_portal_Activity extends BaseActivity implements View.OnClickListener {
     private String TAG = getClass().getSimpleName();
     TextView tvPatient_submit, tvSignIn;
     EditText editEmail,editFullName, editPhone, editAge, editBirthdate, editAddress, editPassword, editConfirmPassword;
@@ -29,11 +31,13 @@ public class Patient_portal_Activity extends AppCompatActivity implements View.O
     HashMap<String, String> hashMap = new HashMap<>();
     int mYear,mMonth,mDay;
     String CountryCode="";
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_portal_);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initToolbar();
 
         tvPatient_submit = (TextView) findViewById(R.id.patient_submit);
         tvSignIn = (TextView)findViewById(R.id.textview_sing);
@@ -69,16 +73,18 @@ public class Patient_portal_Activity extends AppCompatActivity implements View.O
         });
 
     }
-
-
+    private void initToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_white_180));
+        setUpToolbar(toolbar, R.color.colorAccent);
+        setToolbarTitle(getString(R.string.label_doctorregistration), R.color.colorAccent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id=item.getItemId();
-        if (id==android.R.id.home){
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,73 +25,87 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="MDLink" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Book_Appoinment"
-            android:label="MDLink" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Doctor_portal_Activity"
-            android:label="Doctor Registration" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Patient_portal_Activity"
-            android:label="MDLink" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ContactUs_Activity"
             android:label="Contact Us" />
         <activity
             android:name=".AboutUsActivity"
-            android:label="About Us" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".User_Guide_Activity"
-            android:label="User_Guide" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <!--<activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".Login_Doctor"
-            android:label="Login" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Urgent_Care"
-            android:label="Urgent Care" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Medical_Advice"
-            android:label="Medical Advice" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Labs_and_Screening"
-            android:label="LAb And Screening" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Addiction_Activity"
-            android:label="Addiction" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Therapy_Activity"
-            android:label="Therapy" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Mood_Activity"
-            android:label="Depression And Mood" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Doctor_Profile"
-            android:label="Doctor Profile" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Scheduled_Appoinment_Doctor"
-            android:label="Scheduled Appoinment" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Medical_CheckOut_Doctor"
             android:label="Medical Chechout" />
         <activity android:name=".Guide_Page" />
         <activity
             android:name=".Patient_Portal_Data"
-            android:label="@string/title_activity_patient__portal__data"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Doctor_Portel_Data"
-            android:label="@string/title_activity_doctor__portel__data"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <!--<activity android:name=".Splash_Activity" />-->
         <activity android:name=".Signacture_Activity" />
-        <activity android:name=".Patient_Profile"></activity>
+        <activity android:name=".Patient_Profile"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
     </application>
 

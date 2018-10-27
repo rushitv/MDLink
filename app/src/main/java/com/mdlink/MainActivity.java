@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -14,11 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity
+import static com.mdlink.util.Constants.INVALID;
+
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     Toolbar toolbar;
     TextView tvThree,tvThree2,tvThree23,tvThree234,tvThree2345,tvThree23456;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +32,17 @@ public class MainActivity extends AppCompatActivity
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
-        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        setUpToolbar(toolbar, INVALID);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         tvThree = findViewById(R.id.tvThree);
         tvThree.setOnClickListener(this);
@@ -45,19 +57,11 @@ public class MainActivity extends AppCompatActivity
         tvThree23456 = findViewById(R.id.tvOne23456);
         tvThree23456.setOnClickListener(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -72,21 +76,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -99,8 +88,11 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.doctor_portal) {
-            Intent intent = new Intent(MainActivity.this, Doctor_portal_Activity.class);
-            startActivity(intent);
+
+            Doctor_portal_Activity.start(this);
+
+            /*Intent intent = new Intent(MainActivity.this, Doctor_portal_Activity.class);
+            startActivity(intent);*/
 
         } else if (id == R.id.patient_portal) {
             Intent intent = new Intent(MainActivity.this, Patient_portal_Activity.class);
@@ -111,16 +103,17 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.aboutus) {
-            Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
+            startActivity(intent);*/
+            AboutUsActivity.start(this);
+
         } else if (id == R.id.userguide) {
             Intent intent = new Intent(MainActivity.this, User_Guide_Activity.class);
             startActivity(intent);
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

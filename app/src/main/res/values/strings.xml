@@ -33,4 +33,7 @@
     <string name="label_attach_file">Attach file</string>
     <string name="label_medical_certificate">Medical Certificate</string>
     <string name="label_phone_number">Phone Number</string>
+    <string name="loading">label_loading</string>
+    <string name="ok">label_ok</string>
+    <string name="label_doctorregistration">Doctor Registration</string>
 </resources>

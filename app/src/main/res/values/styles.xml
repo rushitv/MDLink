@@ -1,20 +1,27 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionMenuTextColor">@android:color/black</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="actionMenuTextColor">@android:color/black</item>
         <item name="windowNoTitle">true</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -23,6 +30,54 @@
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@color/colorBlue</item>
+        <item name="color">@color/colorAccent</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="TextBold" parent="Text">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextMini" parent="Text">
+        <item name="android:textSize">@dimen/textSizeMini</item>
+    </style>
+
+    <style name="TextMini.Bold" parent="TextBold">
+        <item name="android:textSize">@dimen/textSizeMini</item>
+    </style>
+
+    <style name="TextSmall" parent="Text">
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
+    <style name="TextSmall.Bold" parent="TextBold">
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
+    <style name="TextMedium" parent="Text">
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+    </style>
+
+    <style name="TextMedium.Bold" parent="TextBold">
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+    </style>
+
+    <style name="TextLarge" parent="Text">
+        <item name="android:textSize">@dimen/textSizeLarge</item>
+    </style>
+
+    <style name="TextLarge.Bold" parent="TextBold">
+        <item name="android:textSize">@dimen/textSizeLarge</item>
+    </style>
+
+    <style name="TextHuge" parent="Text">
+        <item name="android:textSize">@dimen/textSizeHuge</item>
+    </style>
+
+    <style name="TextHuge.Bold" parent="TextBold">
+        <item name="android:textSize">@dimen/textSizeHuge</item>
     </style>
 </resources>

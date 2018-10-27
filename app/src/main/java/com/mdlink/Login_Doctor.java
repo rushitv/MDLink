@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,24 +19,22 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class Login_Doctor extends AppCompatActivity {
+public class Login_Doctor extends BaseActivity {
 
     TextView tv;
     EditText email, password;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing__up__doctor);
-/*
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-*/
+        initToolbar();
 
-        tv = (TextView) findViewById(R.id.singup_submit);
-        email = (EditText) findViewById(R.id.login_doc_email);
-        password = (EditText) findViewById(R.id.login_doc_password);
+        tv = findViewById(R.id.singup_submit);
+        email = findViewById(R.id.login_doc_email);
+        password = findViewById(R.id.login_doc_password);
 
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +57,17 @@ public class Login_Doctor extends AppCompatActivity {
                     new ConnectionCall(Login_Doctor.this).isConnectingToInternet();
                 }
 
-
             }
         });
     }
-/*
+
+    private void initToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_white_180));
+        setUpToolbar(toolbar, R.color.colorAccent);
+        setToolbarTitle(getString(R.string.label_login), R.color.colorAccent);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -71,7 +77,7 @@ public class Login_Doctor extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     private class InserData extends AsyncTask<String, String, String> {
 

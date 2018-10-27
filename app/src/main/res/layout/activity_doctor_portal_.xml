@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_doctor_portal_"
-    tools:context=".Doctor_portal_Activity">
+    android:background="@color/colorWhite"
+    tools:targetApi="o">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include layout="@layout/toolbar_mdlink" />
+
+    </LinearLayout>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_height="match_parent">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,15 +26,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="com.example.mrprashant_patel.mdlink.Doctor_portal_Activity">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/edtEmailDP"
@@ -460,4 +464,4 @@
 
         </LinearLayout>
     </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>

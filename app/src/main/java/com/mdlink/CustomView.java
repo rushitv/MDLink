@@ -1,6 +1,7 @@
 package com.mdlink;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +43,10 @@ public class CustomView extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.customviewpager, container,false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.cus_pagerview);
+        ImageView imageView =  view.findViewById(R.id.cus_pagerview);
         imageView.setImageResource(imgdata[position]);
         container.addView(view);
         /*ViewPager viewPager = (ViewPager) container;

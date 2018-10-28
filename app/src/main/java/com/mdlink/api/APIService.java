@@ -1,13 +1,18 @@
 package com.mdlink.api;
 
 import com.google.gson.JsonObject;
+import com.mdlink.model.BookAppointmentRequest;
 import com.mdlink.model.DoctorPortalRequest;
 import com.mdlink.model.DoctorPortalResponse;
+import com.mdlink.model.DoctorsListModel;
+
+import java.util.HashMap;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -43,5 +48,9 @@ public interface APIService {
             @Part MultipartBody.Part medical_certificate
     );
 
+    @POST("availabledoctors")
+    Call<DoctorsListModel> availabledoctors(@Body HashMap jsonObject);
 
+    @POST("appointment")
+    Call<JsonObject> createAppointment(@Body BookAppointmentRequest bookAppointmentRequest);
 }

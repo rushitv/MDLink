@@ -98,8 +98,6 @@ public class Login_Doctor extends BaseActivity {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("email", email.getText().toString());
             hashMap.put("password", password.getText().toString());
-
-
             return new MakeServiceCall().MakeServiceCall("http://api.themdlink.com/api/v1/login", MakeServiceCall.POST, hashMap);
         }
 
@@ -125,6 +123,18 @@ public class Login_Doctor extends BaseActivity {
                         sharedPreferenceManager.saveString("UserName",email.getText().toString());
                         sharedPreferenceManager.saveString("Role",jsonArray.getString("role_id"));
                         sharedPreferenceManager.saveString("UserId",jsonArray.getString("user_id"));
+                        if(jsonArray.has("age")){
+                            sharedPreferenceManager.saveString("Age",jsonArray.getString("age"));
+                        }
+                        if(jsonArray.has("name")){
+                            sharedPreferenceManager.saveString("Name",jsonArray.getString("name"));
+                        }
+                        if(jsonArray.has("location")){
+                            sharedPreferenceManager.saveString("Location",jsonArray.getString("location"));
+                        }
+                        if(jsonArray.has("birthdate")){
+                            sharedPreferenceManager.saveString("Birthdate",jsonArray.getString("birthdate"));
+                        }
 
                         if (jsonArray.getString("role_id").equalsIgnoreCase("1")) {
                             Intent intent = new Intent(Login_Doctor.this, Doctor_Portel_Data.class);

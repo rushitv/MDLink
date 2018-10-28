@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         txtToolbarTitle.setVisibility(View.VISIBLE);
         txtToolbarTitle.setText(title);
+        txtToolbarTitle.setGravity(Gravity.CENTER_HORIZONTAL);
         txtToolbarTitle.setTextColor(ContextCompat.getColor(this, colorRes));
     }
 

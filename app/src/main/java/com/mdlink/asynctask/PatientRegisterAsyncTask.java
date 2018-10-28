@@ -63,14 +63,24 @@ public class PatientRegisterAsyncTask extends AsyncTask<Void,Void,String> {
                 Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show();
                 JSONObject jsonArray = json.getJSONObject("result");
                 if(!TextUtils.isEmpty(jsonArray.getString("user_id"))){
+                    Log.i(TAG,"user_id>>"+jsonArray.getString("user_id"));
+                    Log.i(TAG,"name>>"+jsonArray.getString("name"));
+                    Log.i(TAG,"birthdate>>"+jsonArray.getString("birthdate"));
+
                     Intent intent = new Intent(context, Patient_Portal_Data.class);
                     intent.putExtra("UserName",hashMap.get("userID"));
                     intent.putExtra("Role","2");
                     intent.putExtra("UserId",jsonArray.getString("user_id"));
                     SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context);
                     sharedPreferenceManager.saveString("UserName",hashMap.get("userID"));
-                    sharedPreferenceManager.saveString("Role","2");
+                    sharedPreferenceManager.saveString("RoleId","2");
                     sharedPreferenceManager.saveString("UserId",jsonArray.getString("user_id"));
+                    sharedPreferenceManager.saveString("Name",jsonArray.getString("name"));
+                    sharedPreferenceManager.saveString("Birthdate",jsonArray.getString("birthdate"));
+                    sharedPreferenceManager.saveString("Address",jsonArray.getString("address"));
+                    sharedPreferenceManager.saveString("Age",jsonArray.getString("age"));
+                    sharedPreferenceManager.saveString("Location",jsonArray.getString("location"));
+
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }

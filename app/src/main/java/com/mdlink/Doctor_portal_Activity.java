@@ -76,7 +76,7 @@ public class Doctor_portal_Activity extends BaseActivity implements View.OnClick
     MyDrawView myDrawView;
     private String filePath;
     private TextView tvSignaturePath, tvSelectedFilePath;
-    private Button btnSubmit;
+    private TextView btnSubmit;
 
     APIService apiService =
             RestAPIClent.getClient().create(APIService.class);

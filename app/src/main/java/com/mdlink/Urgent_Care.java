@@ -20,8 +20,6 @@ public class Urgent_Care extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urgent__care);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         listView= (ListView) findViewById(R.id.urgent_list);
         tv= (TextView) findViewById(R.id.urgent_btn);
